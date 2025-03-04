@@ -48,3 +48,14 @@ RETURN cloudAtlas.released AS released_date, cloudAtlas.tagline AS tagline
 """
 single_movie_node = kg.query(movie_nodes_cypher_query)
 # print(single_movie_node)
+
+
+# Cypher patterns with conditional matching
+movie_realaese_date_cypher_query = """
+MATCH (nineties:Movie)
+WHERE nineties.released >= 1990 AND nineties.released < 2000
+RETURN nineties.title AS title
+"""
+
+nineties_movie_nodes = kg.query(movie_realaese_date_cypher_query)
+print(nineties_movie_nodes)

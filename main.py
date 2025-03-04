@@ -80,4 +80,18 @@ tom_hanks_and_co_starred_actors_cypher_query = """
     RETURN co_actors.name, m.title
 """
 tom_hanks_and_co_starred_actors_nodes = kg.query(tom_hanks_and_co_starred_actors_cypher_query)
-print(tom_hanks_and_co_starred_actors_nodes)
+# print(tom_hanks_and_co_starred_actors_nodes)
+
+# Delete data from the graph
+emil_acted_in_movie_cypher_query = """
+MATCH (emil:Person { name: 'Emil Eifrem'}) - [:ACTED_IN] -> (emil_movies:Movie)
+RETURN emil.name, emil_movies.title
+"""
+# emil_acted_in_movie_nodes = kg.query(emil_acted_in_movie_cypher_query)
+# print(emil_acted_in_movie_nodes)
+
+delete_emil_acted_in_movie_cypher_query = """
+MATCH (emil:Person { name: 'Emil Eifrem'}) - [acted_in:ACTED_IN] -> (emil_movies:Movie)
+DELETE acted_in
+"""
+kg.query(delete_emil_acted_in_movie_cypher_query)
